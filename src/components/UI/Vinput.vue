@@ -49,7 +49,7 @@ export default {
         error: {
             type: Array,
             required: false
-        }
+        },
     },
     emits: ["update:value", "blur"],
     inheritAttrs: false,

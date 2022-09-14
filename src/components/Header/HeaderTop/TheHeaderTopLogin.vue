@@ -6,6 +6,7 @@
                 class="btn btn-primary login__btn"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
+                @click="$router.push('/signUp')"
             >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill"
                 viewBox="0 0 16 16">
@@ -17,7 +18,7 @@
             </p>
         </button>
 
-        <TheSignIn></TheSignIn>
+        <!-- <TheSignIn></TheSignIn> -->
 
         <!-- Modal -->
         <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
