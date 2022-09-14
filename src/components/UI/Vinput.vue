@@ -2,13 +2,14 @@
     <label :for="name" class="form-label">{{ label }}</label>
     <div class="wrap">
         <input
-            class="form-control wrap__input wrap__input-error"
+            class="form-control wrap__input"
             :type="type"
             :name="name"
-            :id="name"
+            :id="name + Date.now()"
             :placeholder="placeholder"
             :value="value"
             @input="updateValue"
+            :class="classObj"
         >
         <transition-group name="error">
             <div
@@ -50,12 +51,26 @@ export default {
             required: false
         }
     },
+    emits: ["update:value", "blur"],
+    inheritAttrs: false,
+
     data() {
+        return {
+
+        }
 
     },
     methods: {
         updateValue(e) {
             this.$emit('update:value', e.target.value)
+        }
+    },
+    computed: {
+        classObj() {
+            return {
+                'wrap__input-error':this.error.length,
+                'wrap__input-succes':this.error.length === 0,
+            }
         }
     },
 }
@@ -69,10 +84,14 @@ export default {
 
     .wrap {
         &__input {
-            &:focus {
+
+            &-succes {
+                &:focus {
                 border-color: var(--primary-color);
                 box-shadow: 0 0 0 0.25rem var(--primary-color-4);
             }
+            }
+
 
             &::placeholder {
                 color: var(--placeholder-color);

@@ -6,7 +6,7 @@ import store from "./store";
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
-import global from '@/assets/css/global.css'
+import '@/assets/css/global.css'
 
 
 const app = createApp(App)
@@ -14,5 +14,4 @@ const app = createApp(App)
 app
 .use(store)
 .use(router)
-.use(global)
 .mount("#app");

@@ -87,7 +87,7 @@
             border: none;
             box-shadow: none;
             color: var(--secondary-color);
-        
+
             svg {
                 position: absolute;
                 right:-7px;
@@ -146,4 +146,20 @@
             }
         }
     }
+
+@media (max-width: 575px) {
+    .dropdown {
+        &-toggle {
+            font-size: 12px;
+
+            svg {
+                position: absolute;
+                right:0px;
+                top: 3px;
+                width: 12px;
+                height: 16px;
+            }
+        }
+    }
+}
 </style>

@@ -39,12 +39,13 @@
         </div>
         <div class="col-12">
             <div class="form__account">Don't have an account?
-                <a href="#" class="form__link">Sign up</a>
+                <router-link to="/signUp" class="form__link">Sign up</router-link>
             </div>
         </div>
 
         <div class="form__feedback"> {{ feedback }}</div>
     </form>
+
 </template>
 
 <script>
@@ -53,11 +54,12 @@ import Vinput from '@/components/UI/Vinput'
 import Vcheckbox from '@/components/UI/Vcheckbox'
 
 import useVuelidate from '@vuelidate/core'
+import {hasUppercase, hasLowercase, hasSpecialChars} from '@/ownValidator'
 import { required, email, helpers, minLength } from '@vuelidate/validators'
 
 
 export default {
-    name: 'TheHeaderTopForm',
+    name: 'TheHeaderTopFormSignIn',
     components: {
         Vbutton,
         Vinput,
@@ -87,7 +89,10 @@ export default {
                 },
                 password: {
                     required: helpers.withMessage('The Password field is required', required),
-                    minLength: helpers.withMessage('The minimum password length is 6 characters', minLength(6))
+                    minLength: helpers.withMessage('The minimum password length is 6 characters', minLength(6)),
+                    hasUppercase:helpers.withMessage('Must contain uppercase letters', hasUppercase),
+                    hasLowercase:helpers.withMessage('Must contain lowercase letters', hasLowercase),
+                    hasSpecialChars:helpers.withMessage('Must contain special characters ($%#)', hasSpecialChars),
                 }
             }
         }
@@ -97,13 +102,21 @@ export default {
             this.v$.$validate()
 
            if (!this.v$.$error) {
-        // if ANY fail validation
+
+                const formData = {
+                    email: this.form.email,
+                    password: this.form.password,
+                    checkbox:this.form.isCheckboxActive
+                }
+
+                console.log(formData);
+
                 this.feedback = 'Форма успешна отправлена'
-                console.log(this.form);
-                this.v$.$reset()
+
             } else {
                 this.feedback = 'Форма незарегистрирована'
             }
+             this.v$.$reset()
         }
     },
 }
@@ -117,6 +130,7 @@ export default {
             margin-top: 8px;
             color: var(--select-color);
             font-size: 16px;
+            cursor: default;
         }
 
         &__link {
@@ -130,7 +144,7 @@ export default {
         }
 
         &__feedback {
-            font-size: 20px;
+            font-size: 24px;
             color: var(--primary-color);
         }
     }
